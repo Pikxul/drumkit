@@ -1,4 +1,6 @@
-// using keypress method
+                                                                                // using keypress method
+
+
 
 //button press
 var numberofdrums = document.querySelectorAll(".drum").length;
@@ -7,12 +9,14 @@ for (var i=0; i<numberofdrums; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         var buttoninnerhtml = this.innerHTML;
         makesound(buttoninnerhtml);
+        buttonanimation(buttoninnerhtml);
     });
 }
 
 //keyboard press
 document.addEventListener("keypress", function(event){  // "keypress" is used for  capturing a keyboard event, which occurs when the key is pressed .
     makesound(event.key);
+    buttonanimation(event.key);
 });
 
 function makesound (key) { // ("key") -> MDN : A string representing the name of a keyboard key
@@ -47,6 +51,15 @@ function makesound (key) { // ("key") -> MDN : A string representing the name of
             audio.play();
             break; 
 
-        default:console.log(buttoninnerhtml);
+        default:alert("wrong presss");
     }
+}
+
+function buttonanimation (key) {
+    var activebutton = document.querySelector("."+key);
+    activebutton.classList.add("pressed");
+
+    setTimeout (function() {
+        activebutton.classList.remove("pressed");
+    }, 50);
 }
